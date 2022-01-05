@@ -1,0 +1,14 @@
+// Variables
+
+// Fonts
+$primaryFont: 'Rationale', sans-serif;
+$baseFont: 'Lato', sans-serif;
+
+// Colors
+$primaryColor: #1E1C3A;
+$accentColor: #630E8B;
+
+// Imports
+@import "partials/setup";
+@import "partials/header";
+@import "partials/section-results";
