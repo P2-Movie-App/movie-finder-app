@@ -3,7 +3,7 @@ const movieApp = {};
 
 movieApp.init = () => {
     // call our getData method
-    movieApp.getData();
+    movieApp.formSubmit();
 }
 
 movieApp.key = '1a6e23d16ad2ac274c9fef47acd3b5ff';
@@ -12,11 +12,27 @@ movieApp.key = '1a6e23d16ad2ac274c9fef47acd3b5ff';
 // - apiKey
 // - userQuery
 
-movieApp.getData = () => {
+// form submit event listener 
+movieApp.formSubmit = () => {
+  // get form element - to attach event listener
+  const formElement = document.querySelector('form');
+  formElement.addEventListener('submit', function(event){
+    event.preventDefault(); 
+    const userQuery = event.target[0].value;
+    movieApp.getData(userQuery);
+  });
+
+  // get input string from user
+  
+  // movieApp.getData();
+    // pass string into query
+}
+
+movieApp.getData = (userQuery) => {
     const url = new URL('https://api.themoviedb.org/3/search/movie');
     url.search = new URLSearchParams({
         api_key: movieApp.key,
-        query: 'Comedy'
+        query: userQuery
     })
 
     fetch(url)
@@ -46,9 +62,11 @@ movieApp.displayData = (jsonData) => {
     const imageDiv = document.createElement('div');
     const imageElement = document.createElement('img');
     imageElement.src = jsonData.results[randomIndex].poster_path;
-    // create div to hold description 
 
+    // create div to hold description 
+    
     // append results to page
+    mainContainer.appendChild(mainSection);
     mainSection.appendChild(imageDiv);
     imageDiv.appendChild(imageElement);
 }
