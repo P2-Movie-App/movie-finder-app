@@ -234,3 +234,95 @@ html {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+input {
+  padding: 0.7rem 0rem 0.7rem 1rem;
+  width: 40%;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+button {
+  background-color: #630E8B;
+  color: white;
+  border: none;
+  padding: 0.7rem 4rem;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  input, button {
+    width: 100%;
+  }
+
+  input {
+    margin-bottom: 0.5rem;
+  }
+}
+html {
+  font-size: 125%;
+}
+
+body {
+  background-color: #1E1C3A;
+  font-family: "Lato", sans-serif;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+button {
+  font-family: "Rationale", sans-serif;
+}
+
+.wrapper {
+  width: 85%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+nav p {
+  margin: 1.5rem 0;
+}
+
+h1 {
+  font-size: 4rem;
+  margin: 4rem 0 0 0;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+.header-text {
+  text-align: center;
+}
+.header-text p {
+  letter-spacing: 0.025rem;
+}
+
+footer {
+  text-align: center;
+}
+footer p {
+  padding: 1rem 0;
+}
+footer p a {
+  color: #f4a172;
+  text-decoration: none;
+}

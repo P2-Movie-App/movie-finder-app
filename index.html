@@ -7,38 +7,43 @@
     <title>MovieFinder App</title>
     <link rel=“preconnect” href=“https://fonts.googleapis.com”>
     <link rel=“preconnect” href=“https://fonts.gstatic.com” crossorigin>
-    <link href=“https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Rationale&display=swap” rel=“stylesheet”>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Rationale&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 
 <body>
-    <header>
-        <nav>
-            <p>MovieFinder</p>
-        </nav>
-        <!-- App description -->
-        <h1>MovieFinder</h1>
-        <p>Try "Comedy", "Horror", or "Action"</p>
-        <!-- Start of form -->
-        <form>
-            <label for="search">Search for a movie</label>
-            <input type="text" placeholder="Movie genre" name="search">
-            <!-- Submit button -->
-            <button>Submit</button>
-        </form>
-    </header>
-    <!-- Search movie results -->
-    <main>
-        <!-- Main result -->
-        <section>
-            <!-- Movie poster -->
-            <div></div>
-            <div></div>
-        </section>
-    </main>
-    <!-- Footer credit -->
-    <footer>
-        <p>Created at <a href="https://junocollege.com/">Juno College</a></p>
-    </footer>
+    <!-- wrapper -->
+    <div class="wrapper">
+        <header>
+            <nav>
+                <p>MovieFinder</p>
+            </nav>
+            <!-- App description -->
+            <div class="header-text">
+                <h1>MovieFinder</h1>
+                <p>Try "Comedy", "Horror", or "Action"</p>
+            </div>
+            <!-- Start of form -->
+            <form>
+                <label for="search" class="sr-only">Search for a movie</label>
+                <input type="text" placeholder="Movie genre" id="search" name="search" required>
+                <!-- Submit button -->
+                <button>Submit</button>
+            </form>
+        </header>
+        <!-- Search movie results -->
+        <main>
+            <!-- Main result -->
+            <section>
+                <!-- Movie poster -->
+                <div></div>
+                <div></div>
+            </section>
+        </main>
+        <!-- Footer credit -->
+        <footer>
+            <p>Created at <a href="https://junocollege.com/">Juno College</a></p>
+        </footer>
+    </div>
 </body>
 </html>

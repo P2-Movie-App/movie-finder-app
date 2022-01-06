@@ -1,0 +1,32 @@
+// Header
+// Form styles
+input {
+  padding: 0.7rem 0rem 0.7rem 1rem;
+  width: 40%;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+// Button
+button {
+  background-color: $accentColor;
+  color: white;
+  border: none;
+  padding: 0.7rem 4rem;
+  font-size: 1.2rem;
+}
+
+// Media query
+@media (max-width: 768px) {
+  input, button {
+    width: 100%;
+  }
+
+  input {
+    margin-bottom: 0.5rem;
+  }
+}
