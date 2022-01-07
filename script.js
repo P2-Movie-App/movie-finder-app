@@ -17,6 +17,10 @@ movieApp.formSubmit = () => {
         event.preventDefault(); 
         const userQuery = event.target[0].value;
         movieApp.getData(userQuery);
+        const input = event.target[0];
+        input.value = "";
+        const mainContainer = document.querySelector('main');
+        mainContainer.textContent = "";
     });
 }
 
@@ -54,11 +58,16 @@ movieApp.getVideo = (randMovieId) => {
         })
 }
 
+movieApp.randomIndex = (movieArray) => {
+  // random function - to use to pick movie
+  const randomIndex = Math.floor(Math.random() * movieArray.length);
+  return randomIndex;
+}
+
 // Create a method to generate a random movie id based on random function
 movieApp.displayResult = (jsonData) => {
-  // random function - to use to pick movie
-  const randomIndex = Math.floor(Math.random() * jsonData.results.length);
-
+  const movieArray = jsonData.results;
+  const randomIndex = movieApp.randomIndex(movieArray);
   // accessing movie object on array
   const randMovieObj = jsonData.results[randomIndex];
   
@@ -115,7 +124,7 @@ movieApp.displayVideo = (linkId) => {
     videoEl.width = '560';
     videoEl.height = "315";
     videoEl.style.border = "0";
-
+console.log(videoEl);
     // append videoEl to the mainContainer
     const mainContainer = document.querySelector("main");
     mainContainer.appendChild(trailerSection);
