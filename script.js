@@ -36,17 +36,18 @@ movieApp.getData = (userQuery) => {
 }
 
 // Create a method to generate a random movie id based on random function
-
 movieApp.displayData = (jsonData) => {
   // display data method
   const randomIndex = Math.floor(Math.random() * jsonData.results.length);
+    const randMovieObj = jsonData.results[randomIndex];
+
   // get image from API endpoint
-  const imgEndpoint = `http://image.tmdb.org/t/p/w185${jsonData.results[randomIndex].poster_path}`;
+  const imgEndpoint = `http://image.tmdb.org/t/p/w185${randMovieObj.poster_path}`;
 
   // get main element from page
   const mainContainer = document.querySelector("main");
   const mainSection = document.createElement("section");
-  mainSection.classList.add("mainSection");
+  mainSection.classList.add("main-section");
 
   const imageDiv = document.createElement("div");
   const imageElement = document.createElement("img");
@@ -55,15 +56,27 @@ movieApp.displayData = (jsonData) => {
   // create div to hold description
   const descripDiv = document.createElement("div");
   const header = document.createElement("h2");
-  header.textContent = jsonData.results[randomIndex].title;
+  header.textContent = randMovieObj.title;
 
-  mainSection.appendChild(descripDiv);
-  descripDiv.appendChild(header);
-  
-  // append results to page
+  // create p for rating
+  const rating = document.createElement("p");
+    rating.innerHTML = `<span>Rating</span> ${randMovieObj.vote_average} <span>/10</span>`;
+
+  // create p for description
+  const paragraph = document.createElement("p");
+  paragraph.textContent = randMovieObj.overview;
+
   mainContainer.appendChild(mainSection);
   mainSection.appendChild(imageDiv);
   imageDiv.appendChild(imageElement);
+  
+  // append container
+  mainSection.appendChild(descripDiv);
+  
+  // append results to page
+  descripDiv.appendChild(header);
+  descripDiv.appendChild(rating);
+  descripDiv.appendChild(paragraph);
 }
 
 // error handling tasks
@@ -73,7 +86,4 @@ movieApp.displayData = (jsonData) => {
 // Call init
 movieApp.init();
     
-
-    
-
 
