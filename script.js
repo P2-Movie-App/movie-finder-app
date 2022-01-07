@@ -6,6 +6,7 @@ movieApp.init = () => {
     movieApp.formSubmit();
 }
 
+// api key
 movieApp.key = '1a6e23d16ad2ac274c9fef47acd3b5ff';
 
 // form submit event listener 
@@ -19,8 +20,8 @@ movieApp.formSubmit = () => {
     });
 }
 
-// GetData Function
-// - using apiURL, apiKey, userQuery
+// First API call - GetData Function 
+// - using apiURL, apiKey, pass in userQuery
 movieApp.getData = (userQuery) => {
     const url = new URL('https://api.themoviedb.org/3/search/movie');
     url.search = new URLSearchParams({
@@ -31,18 +32,42 @@ movieApp.getData = (userQuery) => {
     fetch(url)
         .then((response) => response.json())
         .then((jsonResult) => {
-            movieApp.displayData(jsonResult);
+            movieApp.displayResult(jsonResult);
     });
 }
 
-// Create a method to generate a random movie id based on random function
-movieApp.displayData = (jsonData) => {
-  // display data method
-  const randomIndex = Math.floor(Math.random() * jsonData.results.length);
-    const randMovieObj = jsonData.results[randomIndex];
+// Second API - to create movie trailer
+movieApp.getVideo = (randMovieId) => {     
+        const urlVideo = new URL(
+          `https://api.themoviedb.org/3/movie/${randMovieId}/videos`
+        );
+        urlVideo.search = new URLSearchParams({
+          api_key: movieApp.key,
+          append_to_response: "videos"
+        });
 
-  // get image from API endpoint
+    fetch(urlVideo)
+        .then((response) => response.json())
+        .then((jsonResult) => {
+            // call trailer display function
+            movieApp.displayVideo(jsonResult.results[0].key);
+        })
+}
+
+// Create a method to generate a random movie id based on random function
+movieApp.displayResult = (jsonData) => {
+  // random function - to use to pick movie
+  const randomIndex = Math.floor(Math.random() * jsonData.results.length);
+
+  // accessing movie object on array
+  const randMovieObj = jsonData.results[randomIndex];
+  
+  // display additional assets - from object
+  // get image from image storage endpoint
   const imgEndpoint = `http://image.tmdb.org/t/p/w185${randMovieObj.poster_path}`;
+  
+  // get video from API endpoint using generated object id
+  movieApp.getVideo(randMovieObj.id);
 
   // get main element from page
   const mainContainer = document.querySelector("main");
@@ -60,7 +85,7 @@ movieApp.displayData = (jsonData) => {
 
   // create p for rating
   const rating = document.createElement("p");
-    rating.innerHTML = `<span>Rating</span> ${randMovieObj.vote_average} <span>/10</span>`;
+  rating.innerHTML = `<span>Rating</span> ${randMovieObj.vote_average} <span>/10</span>`;
 
   // create p for description
   const paragraph = document.createElement("p");
@@ -77,6 +102,25 @@ movieApp.displayData = (jsonData) => {
   descripDiv.appendChild(header);
   descripDiv.appendChild(rating);
   descripDiv.appendChild(paragraph);
+}
+
+// displayVideo function - call after video API
+movieApp.displayVideo = (linkId) => {
+    // create trailerSection element
+    const trailerSection = document.createElement("section");
+    // trailer video div
+    const videoDiv = document.createElement("div");
+    const videoEl = document.createElement("iframe");
+    videoEl.src = `https://www.youtube.com/embed/${linkId}`;
+    videoEl.width = '560';
+    videoEl.height = "315";
+    videoEl.style.border = "0";
+
+    // append videoEl to the mainContainer
+    const mainContainer = document.querySelector("main");
+    mainContainer.appendChild(trailerSection);
+    trailerSection.appendChild(videoDiv);
+    videoDiv.appendChild(videoEl); 
 }
 
 // error handling tasks
