@@ -291,6 +291,21 @@ body {
   width: 45%;
 }
 
+.error-display {
+  border: 2px solid grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px;
+  text-align: center;
+}
+
 h2 + p {
   font-size: 0.9rem;
 }

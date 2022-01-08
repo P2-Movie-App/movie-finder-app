@@ -97,7 +97,8 @@ movieApp.displayResult = (jsonData) => {
   if ((imgEndpoint === nullpath)) {
     // movie poster
     descript.innerHTML = "Movie Poster not available";
-    mainContainer.appendChild(descripContain);
+    mainSection.appendChild(descripContain);
+    descripContain.classList.add("error-display");
     descripContain.appendChild(descript);
   } else { 
     // Add image element to page
@@ -115,7 +116,6 @@ movieApp.displayResult = (jsonData) => {
 
   // get main element from page
   mainSection.classList.add("main-section");
-
 
   // create div to hold description
   const descripDiv = document.createElement("div");
@@ -161,7 +161,6 @@ movieApp.displayVideo = (linkId) => {
     videoEl.width = '560';
     videoEl.height = "315";
     videoEl.style.border = "0";
-    console.log(videoEl);
     // append videoEl to the mainContainer
     const mainContainer = document.querySelector("main");
     mainContainer.appendChild(trailerSection);
