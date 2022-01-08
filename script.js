@@ -15,12 +15,13 @@ movieApp.formSubmit = () => {
     const formElement = document.querySelector('form');
     formElement.addEventListener('submit', function(event){
         event.preventDefault(); 
-        const contentHolder = document.querySelector('.space');
-        contentHolder.style.display = 'none';
         const userQuery = event.target[0].value;
         movieApp.getData(userQuery);
         const input = event.target[0];
         input.value = "";
+        // put this in when there is result
+        const contentHolder = document.querySelector('.space');
+        contentHolder.style.display = 'none';
         const mainContainer = document.querySelector('main');
         mainContainer.textContent = "";
     });
@@ -69,27 +70,52 @@ movieApp.randomIndex = (movieArray) => {
 
 // Create a method to generate a random movie id based on random function
 movieApp.displayResult = (jsonData) => {
+  // Movie array name
   const movieArray = jsonData.results;
   const randomIndex = movieApp.randomIndex(movieArray);
+
   // accessing movie object on array
   const randMovieObj = jsonData.results[randomIndex];
-  
-  // display additional assets - from object
+
+  // get main from page
+  const mainContainer = document.querySelector("main");    
+  const mainSection = document.createElement("section");
+
   // get image from image storage endpoint
   const imgEndpoint = `http://image.tmdb.org/t/p/w400${randMovieObj.poster_path}`;
+  const nullpath = "http://image.tmdb.org/t/p/w400null";
+
+  // create movie placeholder - no poster error
+  const descripContain = document.createElement("div");
+  const descript = document.createElement("p");
+  
+  // create image elements
+  const imageDiv = document.createElement("div");
+  const imageElement = document.createElement("img");
+
+  // loop to show image
+  if ((imgEndpoint === nullpath)) {
+    // movie poster
+    descript.innerHTML = "Movie Poster not available";
+    mainContainer.appendChild(descripContain);
+    descripContain.appendChild(descript);
+  } else { 
+    // Add image element to page
+    // pass in image endpoint
+    imageElement.src = imgEndpoint;
+    imageElement.alt = `Movie Poster for ${randMovieObj.title}`;      
+
+    // append image result to page
+    mainSection.appendChild(imageDiv);
+    imageDiv.appendChild(imageElement);      
+  }
   
   // get video from API endpoint using generated object id
   movieApp.getVideo(randMovieObj.id);
 
   // get main element from page
-  const mainContainer = document.querySelector("main");
-  const mainSection = document.createElement("section");
   mainSection.classList.add("main-section");
 
-  const imageDiv = document.createElement("div");
-  const imageElement = document.createElement("img");
-  imageElement.src = imgEndpoint;
-  imageElement.alt = `Movie Poster for ${randMovieObj.title}`;
 
   // create div to hold description
   const descripDiv = document.createElement("div");
@@ -108,8 +134,7 @@ movieApp.displayResult = (jsonData) => {
   paragraph.textContent = randMovieObj.overview;
 
   mainContainer.appendChild(mainSection);
-  mainSection.appendChild(imageDiv);
-  imageDiv.appendChild(imageElement);
+
   
   // append container
   mainSection.appendChild(descripDiv);
@@ -127,6 +152,8 @@ movieApp.displayVideo = (linkId) => {
     const trailerSection = document.createElement("section");
     trailerSection.classList.add("trailer-section");
 
+    // if statement - to append to page for video
+
     // trailer video div
     const videoDiv = document.createElement("div");
     const videoEl = document.createElement("iframe");
@@ -134,7 +161,7 @@ movieApp.displayVideo = (linkId) => {
     videoEl.width = '560';
     videoEl.height = "315";
     videoEl.style.border = "0";
-console.log(videoEl);
+    console.log(videoEl);
     // append videoEl to the mainContainer
     const mainContainer = document.querySelector("main");
     mainContainer.appendChild(trailerSection);
