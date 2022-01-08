@@ -73,7 +73,7 @@ movieApp.displayResult = (jsonData) => {
   
   // display additional assets - from object
   // get image from image storage endpoint
-  const imgEndpoint = `http://image.tmdb.org/t/p/w185${randMovieObj.poster_path}`;
+  const imgEndpoint = `http://image.tmdb.org/t/p/w400${randMovieObj.poster_path}`;
   
   // get video from API endpoint using generated object id
   movieApp.getVideo(randMovieObj.id);
@@ -86,6 +86,7 @@ movieApp.displayResult = (jsonData) => {
   const imageDiv = document.createElement("div");
   const imageElement = document.createElement("img");
   imageElement.src = imgEndpoint;
+  imageElement.alt = `Movie Poster for ${randMovieObj.title}`;
 
   // create div to hold description
   const descripDiv = document.createElement("div");
@@ -97,6 +98,9 @@ movieApp.displayResult = (jsonData) => {
   rating.innerHTML = `<span>Rating</span> ${randMovieObj.vote_average} <span>/10</span>`;
 
   // create p for description
+  const overviewTitle = document.createElement("span");
+  overviewTitle.textContent = 'Overview';
+
   const paragraph = document.createElement("p");
   paragraph.textContent = randMovieObj.overview;
 
@@ -110,6 +114,7 @@ movieApp.displayResult = (jsonData) => {
   // append results to page
   descripDiv.appendChild(header);
   descripDiv.appendChild(rating);
+  descripDiv.appendChild(overviewTitle);
   descripDiv.appendChild(paragraph);
 }
 
@@ -117,6 +122,8 @@ movieApp.displayResult = (jsonData) => {
 movieApp.displayVideo = (linkId) => {
     // create trailerSection element
     const trailerSection = document.createElement("section");
+    trailerSection.classList.add("trailer-section");
+
     // trailer video div
     const videoDiv = document.createElement("div");
     const videoEl = document.createElement("iframe");
