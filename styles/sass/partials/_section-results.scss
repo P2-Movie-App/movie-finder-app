@@ -10,6 +10,7 @@ body {
   border: 3px solid grey;
   padding: 3.5rem;
   margin-top: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 .main-section div {
@@ -33,8 +34,13 @@ img {
 .trailer-section {
   iframe {
     width: 100%;
+    min-height: 22rem;
     margin: 1rem 0;
   }
+}
+
+.space {
+  height: 30vh;
 }
 
 // media query

@@ -15,6 +15,8 @@ movieApp.formSubmit = () => {
     const formElement = document.querySelector('form');
     formElement.addEventListener('submit', function(event){
         event.preventDefault(); 
+        const contentHolder = document.querySelector('.space');
+        contentHolder.style.display = 'none';
         const userQuery = event.target[0].value;
         movieApp.getData(userQuery);
         const input = event.target[0];
@@ -36,6 +38,7 @@ movieApp.getData = (userQuery) => {
     fetch(url)
         .then((response) => response.json())
         .then((jsonResult) => {
+            console.log(jsonResult);
             movieApp.displayResult(jsonResult);
     });
 }
