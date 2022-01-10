@@ -36,12 +36,38 @@ movieApp.getData = (userQuery) => {
         query: userQuery
     })
 
-    fetch(url)
-        .then((response) => response.json())
-        .then((jsonResult) => {
-            console.log(jsonResult);
-            movieApp.displayResult(jsonResult);
+  fetch(url)
+    .then((response) => response.json())
+    .then((jsonResult) => {
+      if (jsonResult.total_pages > 0) {
+        movieApp.displayResult(jsonResult);
+      } else {
+        movieApp.errorData();
+      }
     });
+}
+
+movieApp.errorData = () => {
+  const url = new URL('https://api.themoviedb.org/3/trending/movie/day');
+  url.search = new URLSearchParams({
+    api_key: movieApp.key
+  })
+  
+  fetch(url)
+  .then((response) => response.json())
+  .then((jsonResult) => {
+    
+    const mainContainer = document.querySelector('.placeholder');
+    const errorSection = document.createElement('section');
+    const errorMessage = document.createElement('p');
+    errorMessage.classList.add('error-message');
+
+    errorMessage.innerHTML = `No matches found. But here's a movie for you:`
+    mainContainer.appendChild(errorSection);
+    errorSection.appendChild(errorMessage);
+
+    movieApp.displayResult(jsonResult);
+  })
 }
 
 // Second API - to create movie trailer

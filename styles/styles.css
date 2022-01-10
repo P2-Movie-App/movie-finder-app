@@ -249,6 +249,7 @@ form {
           justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 button {
@@ -281,14 +282,23 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  border: 3px solid grey;
+  border-width: 3px;
+  border-style: solid;
+  -o-border-image: linear-gradient(to bottom, #d7d6db, #575656) 1;
+     border-image: -webkit-gradient(linear, left top, left bottom, from(#d7d6db), to(#575656)) 1;
+     border-image: linear-gradient(to bottom, #d7d6db, #575656) 1;
   padding: 3.5rem;
-  margin-top: 3.5rem;
+  margin-top: 2rem;
   margin-bottom: 3rem;
 }
 
 .main-section div {
   width: 45%;
+}
+
+.error-message {
+  padding-top: 2rem 0;
+  margin: 0;
 }
 
 .error-display {
@@ -343,6 +353,16 @@ img {
   img {
     width: 80%;
     margin: 40px auto;
+  }
+}
+@media (max-width: 390px) {
+  .main-section {
+    padding: 1.25rem;
+  }
+
+  img {
+    width: 100%;
+    margin-top: 1.5rem;
   }
 }
 html {
