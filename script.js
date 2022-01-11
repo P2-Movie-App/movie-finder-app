@@ -160,7 +160,7 @@ movieApp.displayResult = (jsonData) => {
 
   // create p for rating
   const rating = document.createElement("p");
-  rating.innerHTML = `<span>Rating</span> ${randMovieObj.vote_average} <span>/10</span>`;
+  rating.innerHTML = `Rating ${randMovieObj.vote_average} /10`;
 
   // create p for description
   const overviewTitle = document.createElement("span");
