@@ -2,7 +2,7 @@
 const movieApp = {};
 
 movieApp.init = () => {
-    // call our getData method
+    // call event listeners
     movieApp.formSubmit();
     movieApp.homeClick();
 }
@@ -20,7 +20,7 @@ movieApp.formSubmit = () => {
         movieApp.getData(userQuery);
         const input = event.target[0];
         input.value = "";
-        // put this in when there is result
+        // remove space element from home
         const contentHolder = document.querySelector('.space');
         contentHolder.style.display = 'none';
         const mainContainer = document.querySelector('main');
@@ -72,7 +72,7 @@ movieApp.errorData = () => {
     const errorSection = document.createElement('section');
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('error-message');
-
+    
     errorMessage.innerHTML = `No matches found. Here's a movie suggestion for you:`
     mainContainer.appendChild(errorSection);
     errorSection.appendChild(errorMessage);
@@ -120,7 +120,6 @@ movieApp.displayResult = (jsonData) => {
 
   // get image from image storage endpoint
   const imgEndpoint = `http://image.tmdb.org/t/p/w400${randMovieObj.poster_path}`;
-  const nullpath = "http://image.tmdb.org/t/p/w400null";
 
   // create movie placeholder - no poster error
   const descripContain = document.createElement("div");
@@ -130,22 +129,22 @@ movieApp.displayResult = (jsonData) => {
   const imageDiv = document.createElement("div");
   const imageElement = document.createElement("img");
 
-  // loop to show image
-  if ((imgEndpoint === nullpath)) {
+  // condition to show image
+  if (randMovieObj.poster_path === null) {
     // movie poster
     descript.innerHTML = "Movie Poster not available";
     mainSection.appendChild(descripContain);
     descripContain.classList.add("error-display");
     descripContain.appendChild(descript);
-  } else { 
+  } else {
     // Add image element to page
     // pass in image endpoint
     imageElement.src = imgEndpoint;
-    imageElement.alt = `Movie Poster for ${randMovieObj.title}`;      
+    imageElement.alt = `Movie Poster for ${randMovieObj.title}`;
 
     // append image result to page
     mainSection.appendChild(imageDiv);
-    imageDiv.appendChild(imageElement);      
+    imageDiv.appendChild(imageElement);
   }
   
   // get video from API endpoint using generated object id
@@ -171,7 +170,6 @@ movieApp.displayResult = (jsonData) => {
   paragraph.textContent = randMovieObj.overview;
 
   mainContainer.appendChild(mainSection);
-
   
   // append container
   mainSection.appendChild(descripDiv);
@@ -189,8 +187,6 @@ movieApp.displayVideo = (linkId) => {
     const trailerSection = document.createElement("section");
     trailerSection.classList.add("trailer-section");
 
-    // if statement - to append to page for video
-
     // trailer video div
     const videoDiv = document.createElement("div");
     const videoEl = document.createElement("iframe");
@@ -198,16 +194,13 @@ movieApp.displayVideo = (linkId) => {
     videoEl.width = '560';
     videoEl.height = "315";
     videoEl.style.border = "0";
+
     // append videoEl to the mainContainer
     const mainContainer = document.querySelector("main");
     mainContainer.appendChild(trailerSection);
     trailerSection.appendChild(videoDiv);
     videoDiv.appendChild(videoEl); 
 }
-
-// error handling tasks
-// When the API call is successful, display the result by appending the data to the results div
-// If the API call fails, display an error message
 
 // Call init
 movieApp.init();
