@@ -37,10 +37,6 @@ h2 + p {
   font-size: 0.9rem;
 }
 
-span {
-  font-weight: bold;
-}
-
 // movie result image 
 img {
   width: 100%;
@@ -50,7 +46,7 @@ img {
 .trailer-section {
   iframe {
     width: 100%;
-    min-height: 22rem;
+    min-height: 30rem;
     margin: 1rem 0;
   }
 }
@@ -59,7 +55,28 @@ img {
   height: 30vh;
 }
 
+
 // media query
+@media (max-width: 1200px) {
+.trailer-section {
+  iframe {
+    width: 100%;
+    min-height: 25rem;
+    margin: 1rem 0;
+  }
+}
+}
+
+@media (max-width: 992px) {
+.trailer-section {
+  iframe {
+    width: 100%;
+    min-height: 22rem;
+    margin: 1rem 0;
+  }
+}
+}
+
 @media (max-width: 768px) {
 .main-section div {
   display: flex;

@@ -240,6 +240,10 @@ input {
   width: 40%;
 }
 
+.header-text p {
+  margin-bottom: 1.5rem;
+}
+
 form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -257,7 +261,11 @@ button {
   color: white;
   border: none;
   padding: 0.7rem 4rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+}
+
+button:hover {
+  background-color: #8905b5;
 }
 
 @media (max-width: 768px) {
@@ -320,17 +328,13 @@ h2 + p {
   font-size: 0.9rem;
 }
 
-span {
-  font-weight: bold;
-}
-
 img {
   width: 100%;
 }
 
 .trailer-section iframe {
   width: 100%;
-  min-height: 22rem;
+  min-height: 30rem;
   margin: 1rem 0;
 }
 
@@ -338,6 +342,20 @@ img {
   height: 30vh;
 }
 
+@media (max-width: 1200px) {
+  .trailer-section iframe {
+    width: 100%;
+    min-height: 25rem;
+    margin: 1rem 0;
+  }
+}
+@media (max-width: 992px) {
+  .trailer-section iframe {
+    width: 100%;
+    min-height: 22rem;
+    margin: 1rem 0;
+  }
+}
 @media (max-width: 768px) {
   .main-section div {
     display: -webkit-box;
@@ -392,7 +410,9 @@ button {
 }
 
 nav p {
-  margin: 1.5rem 0;
+  font-size: 1.7rem;
+  font-family: "Rationale", sans-serif;
+  margin: 2rem 0;
 }
 
 h1 {
@@ -430,7 +450,10 @@ footer {
   margin-top: 3rem;
 }
 footer p {
-  padding: 1rem 0;
+  margin: 20px auto;
+  line-height: 2rem;
+  width: 280px;
+  padding: 0.5rem 0;
 }
 footer p a {
   color: #f4a172;

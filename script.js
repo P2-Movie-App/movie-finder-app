@@ -4,6 +4,7 @@ const movieApp = {};
 movieApp.init = () => {
     // call our getData method
     movieApp.formSubmit();
+    movieApp.homeClick();
 }
 
 // api key
@@ -25,6 +26,16 @@ movieApp.formSubmit = () => {
         const mainContainer = document.querySelector('main');
         mainContainer.textContent = "";
     });
+}
+
+movieApp.homeClick = () => {
+  const navElement = document.querySelector('nav');
+  navElement.addEventListener('click', function(event) {
+        const contentHolder = document.querySelector(".space");
+        contentHolder.style.display = "block";
+        const mainContainer = document.querySelector("main");
+        mainContainer.textContent = "";   
+  })
 }
 
 // First API call - GetData Function 
@@ -62,7 +73,7 @@ movieApp.errorData = () => {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('error-message');
 
-    errorMessage.innerHTML = `No matches found. But here's a movie for you:`
+    errorMessage.innerHTML = `No matches found. Here's a movie suggestion for you:`
     mainContainer.appendChild(errorSection);
     errorSection.appendChild(errorMessage);
 
